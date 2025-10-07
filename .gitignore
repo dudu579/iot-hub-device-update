@@ -41,7 +41,7 @@ cscope.po.out
 out/
 build/
 Testing/
-
+build-arm/
 ### VCPKG
 .vcpkg/
 .vcpkg-installed/

@@ -45,7 +45,7 @@ bool LoadBufferWithFileContents(const char* filePath, char* strBuffer, const siz
         goto done;
     }
 
-    const long fileSize = bS.st_size;
+    const size_t fileSize = (size_t)bS.st_size;
     if (fileSize == 0 || fileSize > strBuffSize)
     {
         goto done;

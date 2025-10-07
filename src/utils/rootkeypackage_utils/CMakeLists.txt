@@ -23,7 +23,7 @@ endif ()
 target_include_directories (${target_name} PUBLIC inc ${ADUC_EXPORT_INCLUDES})
 
 target_link_aziotsharedutil (${target_name} PUBLIC)
-target_link_dosdk (${target_name} PRIVATE)
+# target_link_dosdk (${target_name} PRIVATE)
 
 target_link_libraries (
     ${target_name}
