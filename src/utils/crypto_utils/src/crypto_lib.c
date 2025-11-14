@@ -219,7 +219,7 @@ bool CryptoUtils_IsValidSignature(
 
 CryptoKeyHandle RSAKey_ObjFromModulusBytesExponentInt(const uint8_t* N, size_t N_len, const unsigned int e)
 {
-#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+#if OPENSSL_VERSION_NUMBER >= 0x40000000L
     int status = 0;
     EVP_PKEY* result = NULL;
     EVP_PKEY_CTX* ctx = NULL;
@@ -337,6 +337,8 @@ done:
     return CryptoKeyHandleToEVP_PKEY(result);
 
 #else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     _Bool success = false;
     EVP_PKEY* pkey = NULL;
 
@@ -421,7 +423,7 @@ done:
  */
 CryptoKeyHandle RSAKey_ObjFromBytes(const uint8_t* N, size_t N_len, const uint8_t* e, size_t e_len)
 {
-#if (OPENSSL_VERSION_NUMBER >= 0x30000000L)
+#if (OPENSSL_VERSION_NUMBER >= 0x40000000L)
     int status = 0;
     EVP_PKEY* result = NULL;
     EVP_PKEY_CTX* ctx = NULL;
@@ -539,6 +541,8 @@ done:
 
     return CryptoKeyHandleToEVP_PKEY(result);
 #else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     bool success = false;
     EVP_PKEY* pkey = NULL;
 
@@ -617,7 +621,7 @@ done:
  */
 CryptoKeyHandle RSAKey_ObjFromStrings(const char* N, const char* e)
 {
-#if (OPENSSL_VERSION_NUMBER >= 0x30000000L)
+#if (OPENSSL_VERSION_NUMBER >= 0x40000000L)
     int status = 0;
     EVP_PKEY* result = NULL;
     EVP_PKEY_CTX* ctx = NULL;
@@ -732,6 +736,8 @@ done:
 
     return CryptoKeyHandleToEVP_PKEY(result);
 #else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     EVP_PKEY* result = NULL;
     EVP_PKEY* pkey = NULL;
     BIGNUM* M = NULL;
@@ -907,7 +913,7 @@ CONSTBUFFER_HANDLE CryptoUtils_GenerateRsaPublicKey(const char* modulus_b64url, 
 {
     CONSTBUFFER_HANDLE publicKeyData = NULL;
 
-#if OPENSSL_VERSION_NUMBER >= 0x30000000L
+#if OPENSSL_VERSION_NUMBER >= 0x40000000L
     unsigned char *modulus_bytes, *exponent_bytes;
     int modulus_length, exponent_length;
     int status = 0;
@@ -1038,6 +1044,8 @@ done:
     // OpenSSL 3.0 took the guess work out of ownership so we can free the pkey in addition to the bn_modulus and bn_exponent
     EVP_PKEY_free(pkey);
 #else
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wdeprecated-declarations"
     unsigned char* modulus_bytes = NULL;
     unsigned char* exponent_bytes = NULL;
     int modulus_length, exponent_length;
